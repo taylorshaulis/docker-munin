@@ -4,4 +4,5 @@ docker run --detach --name munin-www-server \
 	--network=host \
 	--volume /munin:/munin \
 	--publish 80:80 \
+	--restart unless-stopped \
 	munin-www-server
