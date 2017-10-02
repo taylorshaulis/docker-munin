@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run --detach --name cron-poller \
+	--network=host \
+	--volume `pwd`/munin.conf:/etc/munin/munin.conf \
+	--volume /munin:/munin \
+	cron-poller
+
+docker exec -ti cron-poller /bin/bash -c "mkdir -p /munin/lib/munin && mkdir -p /munin/cache/munin/www && mkdir -p /munin/log/munin && mkdir -p /munin/run/munin"
+
+docker exec -ti cron-poller chown -R munin:munin /munin
